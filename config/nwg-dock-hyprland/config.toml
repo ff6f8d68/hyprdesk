@@ -1,0 +1,59 @@
+# ═══════════════════════════════════════════════════════════════════════
+# nwg-dock — unified glass desktop
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Bottom, auto-hiding, centred pill of frosted glass. Styling lives in
+# ./style.css, which imports the shared tokens from ../../hypr/glass.css so
+# the dock matches waybar, swaync and Hyprland windows.
+#
+# The launcher button (leftmost, the 4-square grid icon) opens the rofi
+# launchpad — the same thing SUPER + D opens.
+#
+# Inspect the effective merged config at any time:   nwg-dock --print-config
+# Most keys hot-reload on save; autohide / resident / hotspot-layer / layer /
+# exclusive need a dock restart.
+
+[behavior]
+# Show only when the cursor hits the bottom edge, hide again when it leaves
+autohide = true
+hide-timeout = 420          # ms after the cursor leaves before hiding
+hotspot-delay = 20          # ms before the hotspot pops the dock up
+hotspot-layer = "overlay"   # catch the hotspot above fullscreen windows
+resident = false
+
+[layout]
+position = "bottom"
+alignment = "center"        # centred pill rather than a full-width bar
+full = false
+mb = 8                      # float the pill off the screen edge
+ml = 0
+mr = 0
+mt = 0
+layer = "top"               # under notifications, over normal windows
+# exclusive = true makes the dock claim tiling space (auto_exclusive_zone_enable),
+# so Hyprland re-tiles windows to make room instead of covering them.
+# It is NOT a permanent reservation: hiding the dock calls set_visible(false),
+# which unmaps the layer surface and releases the zone, so windows get the
+# space back. Net effect — the dock pushes tiles up while it is up, and lets
+# them expand again when it slides away.
+exclusive = true
+output = ""                 # follow the focused monitor
+
+[appearance]
+icon-size = 44
+opacity = 100               # background alpha is set in style.css (glass tokens)
+css-file = "style.css"
+launch-animation = true     # bounce while an app starts
+
+[launcher]
+# Absolute path: the launcher is also bound to SUPER + D, both share one script
+launcher-cmd = "@HYPRDESK_HOME@/.config/hypr/scripts/RofiLaunchpad.sh"
+launcher-pos = "start"
+nolauncher = false
+
+[filters]
+# Keep the dock free of its own menu windows
+ignore-classes = ["rofi", "swaync"]
+num-ws = 5
+ws = false                  # no workspace row — icon-only pill
+no-fullscreen-suppress = false

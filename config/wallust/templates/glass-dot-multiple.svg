@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     wallust template — glass-dot-multiple
+     ═══════════════════════════════════════════════════════════════════════
+     Running-app indicator for apps with 2+ windows: two translucent accent
+     dots, centred as a pair in the 44x5 canvas.
+
+     Same 44:5 aspect requirement as glass-dot-single.svg — see that file
+     for why. Dots sit at x=18.5 and x=25.5 so the pair is centred on x=22
+     with a clear 2.4px gap — closer together and the antialiased edges
+     bleed into a faint bridge between them.
+     Target:
+       ~/.local/share/nwg-dock-hyprland/images/task-multiple.svg
+     ─────────────────────────────────────────────────────────────────────── -->
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="5" viewBox="0 0 44 5">
+  <circle cx="18.5" cy="2.5" r="2.3" fill="#{{color12 | strip}}" fill-opacity="0.85"/>
+  <circle cx="25.5" cy="2.5" r="2.3" fill="#{{color12 | strip}}" fill-opacity="0.85"/>
+</svg>

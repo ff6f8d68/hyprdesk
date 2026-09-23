@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ═══════════════════════════════════════════════════════════════════════
+     wallust template — glass-dot-single
+     ═══════════════════════════════════════════════════════════════════════
+     Running-app indicator for nwg-dock: one translucent accent dot, drawn
+     centred in the 44x5 canvas the dock renders it into.
+
+     The dock sizes this asset as `icon-size / 8` tall and full icon width
+     wide (see INDICATOR_DIVISOR upstream), so the viewBox must keep that
+     44:5 aspect — a matching aspect means from_file_at_size() scales it
+     exactly, with no letterboxing and the dot dead centre under the icon.
+
+     Fill is wallust's accent (color12) at 85% so the dot reads as tinted
+     glass over the frosted pill rather than a solid sticker, and re-tints
+     with the wallpaper. Target:
+       ~/.local/share/nwg-dock-hyprland/images/task-single.svg
+     ─────────────────────────────────────────────────────────────────────── -->
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="5" viewBox="0 0 44 5">
+  <circle cx="22" cy="2.5" r="2.3" fill="#{{color12 | strip}}" fill-opacity="0.85"/>
+</svg>

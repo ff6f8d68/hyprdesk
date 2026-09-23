@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   wallust template — glass-rofi
+   ═══════════════════════════════════════════════════════════════════════
+
+   rofi cannot alpha-composite an existing colour, so the glass surface
+   colours are emitted as 8-digit hex (#RRGGBBAA) with the alpha appended
+   directly. That keeps the app menu / launchpad tinted by the wallpaper,
+   exactly like waybar, swaync and the dock are via glass.css.
+
+   Alpha -> hex reference (matches ~/.config/hypr/glass.css):
+     0.62 surface -> 9e      0.50 border      -> 80
+     0.78 strong  -> c7      0.45 border-soft -> 73
+     0.42 soft    -> 6b      0.22 accent-soft -> 38
+     0.06 raised  -> 0f      0.55 shadow      -> 8c
+     0.12 hover   -> 1f
+   ─────────────────────────────────────────────────────────────────────── */
+
+* {
+glass-surface:        #2A23319e;
+glass-surface-strong: #2A2331c7;
+glass-surface-soft:   #2A23316b;
+glass-raised:         #E4C9D60f;
+glass-hover:          #E4C9D61f;
+glass-border:         #9A538C80;
+glass-border-soft:    #99528C73;
+glass-shadow:         #270B488c;
+glass-fg:             #E4C9D6;
+glass-fg-dim:         #E4C9D6a6;
+glass-accent:         #9A538C;
+glass-accent-soft:    #9A538C38;
+}

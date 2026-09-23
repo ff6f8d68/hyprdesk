@@ -1,0 +1,180 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   UNIFIED GLASS — rofi launchpad
+   ═══════════════════════════════════════════════════════════════════════
+
+   Icon-grid app menu ("launchpad"), opened by:
+     * SUPER + D
+     * the launcher button on nwg-dock
+   both of which call ~/.config/hypr/scripts/RofiLaunchpad.sh
+
+   Real transparency is left on and the blur comes from Hyprland itself:
+       layerrule = match:namespace rofi, blur on
+   in ~/.config/hypr/UserConfigs/WindowRules.conf
+
+   Colours are wallust-generated (glass-rofi.rasi) so the menu re-tints with
+   the wallpaper, and the shape mirrors the window chrome in
+   UserDecorations.conf: radius 10, 1px accent border, same palette.
+   ─────────────────────────────────────────────────────────────────────── */
+
+@import "~/.config/rofi/0-shared-fonts.rasi"
+@import "~/.config/rofi/wallust/colors-rofi.rasi"
+@import "~/.config/rofi/wallust/glass-rofi.rasi"
+
+* {
+    background-color: transparent;
+    text-color:       @glass-fg;
+    border-color:     @glass-border;
+    spacing:          0px;
+    padding:          0px;
+}
+
+/* ---- window: the frosted slab ---- */
+window {
+    transparency:      "real";
+    location:          center;
+    anchor:            center;
+    fullscreen:        false;
+    width:             52%;
+    border:            1px solid;
+    border-radius:     10px;
+    border-color:      @glass-border;
+    background-color:  @glass-surface;
+    cursor:            "default";
+}
+
+mainbox {
+    spacing:           12px;
+    padding:           18px;
+    background-color:  transparent;
+    children:          [ "inputbar", "listview" ];
+}
+
+/* ---- search bar ---- */
+inputbar {
+    children:          [ "prompt", "entry" ];
+    spacing:           10px;
+    padding:           10px 14px;
+    border:            1px solid;
+    border-radius:     10px;
+    border-color:      @glass-border-soft;
+    background-color:  @glass-raised;
+}
+
+prompt {
+    background-color:  transparent;
+    text-color:        @glass-accent;
+    padding:           0px;
+}
+
+textbox-prompt-colon {
+    enabled:           true;
+    expand:            false;
+    str:               "  ";
+    background-color:  transparent;
+    text-color:        @glass-accent;
+}
+
+entry {
+    placeholder:       "Search apps…";
+    placeholder-color: @glass-fg-dim;
+    background-color:  transparent;
+    text-color:        @glass-fg;
+    cursor:            text;
+    padding:           0px;
+}
+
+num-filtered-rows,
+num-rows,
+textbox-num-sep,
+case-indicator {
+    enabled:           false;
+    expand:            false;
+    background-color:  transparent;
+}
+
+/* ---- icon grid (launchpad) ---- */
+listview {
+    columns:           5;
+    lines:             4;
+    cycle:             true;
+    dynamic:           true;
+    scrollbar:         false;
+    layout:            vertical;
+    reverse:           false;
+    fixed-height:      true;
+    fixed-columns:     true;
+    spacing:           8px;
+    padding:           4px;
+    border:            0px;
+    background-color:  transparent;
+    cursor:            "default";
+}
+
+scrollbar {
+    handle-width:      3px;
+    handle-color:      @glass-accent;
+    border-radius:     10px;
+    background-color:  @glass-raised;
+}
+
+element {
+    orientation:       vertical;
+    spacing:           6px;
+    padding:           12px 8px;
+    border:            1px solid;
+    border-color:      transparent;
+    border-radius:     10px;
+    background-color:  transparent;
+    text-color:        @glass-fg;
+    cursor:            pointer;
+}
+
+element normal.normal,
+element normal.active,
+element normal.urgent {
+    background-color:  transparent;
+    text-color:        @glass-fg;
+}
+
+/* Selected cell: the accent-lit pane of glass */
+element selected.normal,
+element selected.active,
+element selected.urgent {
+    background-color:  @glass-accent-soft;
+    text-color:        @glass-fg;
+    border:            1px solid;
+    border-color:      @glass-border;
+}
+
+element alternate.normal,
+element alternate.active,
+element alternate.urgent {
+    background-color:  transparent;
+    text-color:        @glass-fg;
+}
+
+element-icon {
+    size:              3.4em;
+    background-color:  transparent;
+    text-color:        inherit;
+    cursor:            inherit;
+}
+
+element-text {
+    background-color:  transparent;
+    text-color:        inherit;
+    highlight:         inherit;
+    cursor:            inherit;
+    vertical-align:    0.5;
+    horizontal-align:  0.5;
+}
+
+/* ---- error state ---- */
+error-message {
+    padding:           12px;
+    border:            1px solid;
+    border-radius:     10px;
+    border-color:      @glass-border;
+    background-color:  @glass-surface-strong;
+    text-color:        @glass-fg;
+}

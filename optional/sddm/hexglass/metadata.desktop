@@ -1,0 +1,16 @@
+[SddmGreeterTheme]
+Name=hyprdesk
+Description=hyprdesk login screen — radial gradient, drifting stars, Anurati + Snasm
+Author=hexagon
+Copyright=(c) 2026 hexagon
+License=MIT
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/ff6f8d68
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Theme-Id=hyprdesk
+Theme-API=2.0
+QtVersion=5

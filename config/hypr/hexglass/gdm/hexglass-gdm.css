@@ -1,0 +1,116 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   HEXGLASS — GDM greeter overrides (appended, last rule wins)
+   ═══════════════════════════════════════════════════════════════════════
+   Ported from the Sci-Fi Hexagon welcome screen. St has no
+   radial-gradient(), so the full-screen bloom comes from the bundled
+   hex-bg.png (pre-rendered gradient + stars) and every surface uses
+   solid colours from the gradient:
+     accent  #ac81ff · mid #5d458f · deep #1a1435 · base #0a0715
+   with the wallust-derived text tones #e4c9d6 (fg) / #927684 (dim).
+   ───────────────────────────────────────────────────────────────────── */
+
+#lockDialogGroup {
+  background: #0a0715 url(resource:///org/gnome/shell/theme/hex-bg.png);
+  background-size: cover; }
+
+.login-dialog,
+.unlock-dialog {
+  color: #e4c9d6; }
+
+/* ── user list tiles ─────────────────────────────────────────────────── */
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item {
+  color: #e4c9d6;
+  background-color: rgba(26, 20, 53, 0.85);
+  border-radius: 10px; }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:hover {
+  color: #e4c9d6;
+  background-color: rgba(93, 69, 143, 0.85); }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:selected,
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:focus {
+  color: #e4c9d6;
+  box-shadow: inset 0 0 0 2px #ac81ff !important;
+  background-color: rgba(26, 20, 53, 0.95); }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:selected:hover,
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:focus:hover {
+  background-color: rgba(93, 69, 143, 0.95); }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:active {
+  color: #e4c9d6;
+  background-color: #1a1435; }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item .login-dialog-timed-login-indicator {
+  background-color: #ac81ff; }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:logged-in .user-icon {
+  border-color: #ac81ff; }
+.login-dialog-user-list-view .login-dialog-user-list .login-dialog-user-list-item:logged-in .user-icon StIcon {
+  background-color: rgba(172, 129, 255, 0.3); }
+
+/* ── "Not listed?" + session buttons ─────────────────────────────────── */
+.login-dialog-not-listed-button,
+.login-dialog-button.cancel-button,
+.login-dialog-button.switch-user-button,
+.login-dialog-button.login-dialog-auth-menu-button,
+.login-dialog-button.login-dialog-session-list-button,
+.login-dialog-button.web-login-intro-button {
+  color: #e4c9d6;
+  background-color: rgba(26, 20, 53, 0.85);
+  border-radius: 10px; }
+.login-dialog-not-listed-button:hover,
+.login-dialog-button.cancel-button:hover,
+.login-dialog-button.switch-user-button:hover,
+.login-dialog-button.login-dialog-auth-menu-button:hover,
+.login-dialog-button.login-dialog-session-list-button:hover,
+.login-dialog-button.web-login-intro-button:hover {
+  color: #ac81ff;
+  background-color: rgba(93, 69, 143, 0.85); }
+.login-dialog-not-listed-button:focus,
+.login-dialog-button.cancel-button:focus,
+.login-dialog-button.switch-user-button:focus,
+.login-dialog-button.login-dialog-auth-menu-button:focus,
+.login-dialog-button.login-dialog-session-list-button:focus,
+.login-dialog-button.web-login-intro-button:focus {
+  color: #ac81ff;
+  box-shadow: inset 0 0 0 2px #ac81ff !important;
+  background-color: rgba(26, 20, 53, 0.95); }
+
+/* ── password entry ──────────────────────────────────────────────────── */
+.login-dialog StEntry,
+.unlock-dialog StEntry {
+  color: #e4c9d6;
+  caret-color: #ac81ff;
+  selection-background-color: #5d458f;
+  selected-color: #e4c9d6;
+  background-color: rgba(10, 7, 21, 0.65);
+  box-shadow: inset 0 0 0 2px rgba(93, 69, 143, 0.9) !important;
+  border-radius: 10px; }
+.login-dialog StEntry:focus,
+.unlock-dialog StEntry:focus {
+  color: #e4c9d6;
+  caret-color: #ac81ff;
+  background-color: rgba(10, 7, 21, 0.75);
+  box-shadow: inset 0 0 0 2px #ac81ff !important; }
+.login-dialog StEntry:insensitive,
+.unlock-dialog StEntry:insensitive {
+  color: #927684;
+  background-color: rgba(10, 7, 21, 0.4);
+  box-shadow: inset 0 0 0 2px rgba(93, 69, 143, 0.4) !important; }
+
+/* ── banner ("WELCOME BACK, HEXAGON" via org.gnome.login-screen) ─────── */
+.login-dialog-banner {
+  color: #ac81ff;
+  font-family: Anurati;
+  font-size: 1.6em; }
+.login-dialog-banner-view {
+  max-width: 32em; }
+
+/* ── caps-lock / message warnings ────────────────────────────────────── */
+.login-dialog .caps-lock-warning-label,
+.unlock-dialog .caps-lock-warning-label,
+.login-dialog .login-dialog-message-warning {
+  color: #927684; }
+
+/* ── session lock clock (unlock-dialog in GNOME sessions) ────────────── */
+.unlock-dialog-clock {
+  color: #e4c9d6; }
+.unlock-dialog-clock .unlock-dialog-clock-time {
+  font-family: Anurati; }
+.unlock-dialog-clock .unlock-dialog-clock-date {
+  color: #927684; }

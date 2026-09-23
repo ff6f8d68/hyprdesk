@@ -1,0 +1,74 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   UNIFIED GLASS — shared design tokens for every GTK layer surface
+   ═══════════════════════════════════════════════════════════════════════
+
+   This file is the single source of truth for the glass look. Waybar,
+   swaync and nwg-dock all import it, so the bar, notifications, dock and
+   launcher stay pixel-consistent with each other and with Hyprland itself.
+
+   It deliberately mirrors ~/.config/hypr/UserConfigs/UserDecorations.conf
+   so that layer surfaces read as "more Hyprland windows":
+     rounding 10  ·  border 2px  ·  col.active_border = $color12
+     col.inactive_border = $color10  ·  translucent bg + blur
+
+   Colours come from wallust, so switching wallpaper re-tints the whole
+   desktop in one shot:  SUPER + T  (ThemeChanger.sh)
+
+   Consumer import lines, using absolute file:// URLs so the nesting is
+   unambiguous regardless of the importing surface's working directory:
+     waybar    ~/.config/waybar/style/<theme>.css
+     swaync    ~/.config/swaync/style.css
+     nwg-dock  ~/.config/nwg-dock-hyprland/style.css
+               -> @import url("file:///home/your-user/.config/hypr/glass.css");
+   ─────────────────────────────────────────────────────────────────────── */
+
+@import url("../waybar/wallust/colors-waybar.css");
+
+/* ── Surfaces ──────────────────────────────────────────────────────────
+   Layered transparency: soft = recessed tray, bg = default panel,
+   strong = raised menus/tooltips that sit above other glass.          */
+/* ── HEXGLASS — the favourite gradient ───────────────────────────────────
+   #ac81ff 0% → #5d458f 25% → #1a1435 65% → #0a0715 100%
+   (radial, circle at 50% 100% — bottom-center bloom)
+
+   GTK cannot put a gradient inside @define-color, so the bg tokens below
+   are SOLID colours from the gradient (deep #1a1435 with alpha — the glass
+   base), and every consumer paints the real radial gradient itself via
+   background-image:
+     radial-gradient(circle at 50% 100%,
+       rgba(172,129,255,a) 0%, rgba(93,69,143,a) 25%,
+       rgba(26,20,53,a)    65%, rgba(10,7,21,a)   100%)
+   where a surface is large enough to be worth it (waybar pills, swaync
+   control centre, nwg-dock pill, wlogout backdrop).
+   ───────────────────────────────────────────────────────────────────── */
+@define-color hex-accent        #ac81ff;
+@define-color hex-mid           #5d458f;
+@define-color hex-deep          #1a1435;
+@define-color hex-black         #0a0715;
+
+@define-color glass-bg          rgba(26, 20, 53, 0.55);
+@define-color glass-bg-strong   rgba(26, 20, 53, 0.78);
+@define-color glass-bg-soft     rgba(26, 20, 53, 0.35);
+@define-color glass-raised      alpha(@foreground, 0.06);
+@define-color glass-hover       alpha(@foreground, 0.12);
+@define-color glass-active      alpha(@foreground, 0.18);
+
+/* ── Edges — mirrors col.active_border / col.inactive_border ─────────── */
+@define-color glass-border      alpha(@color12, 0.50);
+@define-color glass-border-soft alpha(@color10, 0.45);
+@define-color glass-highlight   alpha(@foreground, 0.12);
+@define-color glass-shadow      alpha(@color1, 0.55);
+
+/* ── Text + accents ────────────────────────────────────────────────── */
+@define-color glass-fg          @foreground;
+@define-color glass-fg-dim      alpha(@foreground, 0.65);
+@define-color glass-accent      @color12;
+@define-color glass-accent-soft alpha(@color12, 0.22);
+@define-color glass-urgent      @color13;
+@define-color glass-warning     @color14;
+@define-color glass-ok          @color7;
+
+/* ── Shapes — keep in sync with `rounding` in UserDecorations.conf ───── */
+/* glass-radius     10px   panels, pills, menus (== Hyprland window radius) */
+/* glass-radius-sm   8px   elements inside a panel                          */
+/* glass-radius-pill 999px dock / launcher button ends                      */

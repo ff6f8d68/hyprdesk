@@ -1,0 +1,26 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   rofi config — glass launchpad
+   Usage:  rofi -show drun -config ~/.config/rofi/config-glass-launchpad.rasi
+   (wrapped by ~/.config/hypr/scripts/RofiLaunchpad.sh so SUPER + D and the
+   dock's launcher button share one code path)
+
+   Follows the JaKooLit per-script convention (config-clipboard.rasi,
+   config-calc.rasi, …), so the user's default rofi theme is untouched.
+   ─────────────────────────────────────────────────────────────────────── */
+
+@import "~/.config/rofi/0-shared-fonts.rasi"
+@theme "~/.config/rofi/glass-launchpad.rasi"
+
+configuration {
+    modi:                    "drun,run,window";
+    show-icons:              true;
+    display-drun:            "  apps";
+    display-run:             "  run";
+    display-window:          "  windows";
+    drun-display-format:     "{name}";
+    window-format:           "{w} · {c} · {t}";
+    drun-match-fields:       "name,generic,exec,categories,keywords";
+    hover-select:            true;
+    me-select-entry:         "MouseSecondary";
+    me-accept-entry:         "MousePrimary";
+}

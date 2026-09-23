@@ -1,0 +1,356 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   [Wallust Glass] Hyprland Frost — waybar
+   ═══════════════════════════════════════════════════════════════════════
+
+   Part of the unified glass desktop. All tokens (glass-bg, glass-border,
+   glass-accent, …) come from ~/.config/hypr/glass.css, which mirrors the
+   blur/border/rounding values used by Hyprland windows themselves — so the
+   bar reads as another frosted Hyprland surface rather than a separate theme.
+
+   Apply with:  SUPER CTRL B   (WaybarStyles.sh — listed as "Hyprland Frost")
+   Blur comes from:  ~/.config/hypr/UserConfigs/WindowRules.conf
+   ─────────────────────────────────────────────────────────────────────── */
+
+@import url("file://@HYPRDESK_HOME@/.config/waybar/wallust/colors-waybar.css");
+@import url("file://@HYPRDESK_HOME@/.config/hypr/glass.css");
+
+* {
+	font-family: "Snasm", "Snasm Light", sans-serif;
+	font-weight: bold;
+	min-height: 0;
+	/* set font-size to 100% if font scaling is set to 1.00 using nwg-look */
+	font-size: 97%;
+	font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+	border: none;
+	text-shadow: none;
+}
+
+window#waybar {
+	background: transparent;
+	color: @glass-fg;
+}
+
+window#waybar.hidden {
+	opacity: 0.5;
+}
+
+window#waybar.empty {
+	background: transparent;
+}
+
+window#waybar.empty #window {
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+/* ── The three frosted pills ─────────────────────────────────────────────
+   radius 10 mirrors `rounding` in UserDecorations.conf; the inset highlight
+   is the CSS stand-in for Hyprland's top border sheen.
+   The pill fill is the Hexglass gradient (radial from bottom-center):
+     #ac81ff 0% → #5d458f 25% → #1a1435 65% → #0a0715 100%
+   glass-bg (solid) is the fallback if background-image is unsupported.   */
+.modules-left,
+.modules-center,
+.modules-right {
+	background-color: @glass-bg;
+	background-image: radial-gradient(circle at 50% 100%,
+		rgba(172, 129, 255, 0.62) 0%,
+		rgba(93, 69, 143, 0.62) 25%,
+		rgba(26, 20, 53, 0.62) 65%,
+		rgba(10, 7, 21, 0.62) 100%);
+	border: 1px solid @glass-border;
+	border-radius: 10px;
+	background-clip: padding-box;
+	background-origin: border-box;
+	box-shadow: inset 0 1px 0 @glass-highlight,
+	            0 4px 14px @glass-shadow;
+	margin: 1px 0;
+	padding: 1px 6px;
+}
+
+.modules-center {
+	border-color: @glass-border-soft;
+}
+
+.modules-right {
+	border-color: @glass-border-soft;
+}
+
+/* ── Tooltips — opaque enough to read over any wallpaper ───────────────── */
+tooltip {
+	background-color: @glass-bg-strong;
+	background-image: radial-gradient(circle at 50% 100%,
+		rgba(172, 129, 255, 0.78) 0%,
+		rgba(93, 69, 143, 0.78) 25%,
+		rgba(26, 20, 53, 0.78) 65%,
+		rgba(10, 7, 21, 0.78) 100%);
+	border: 1px solid @glass-border;
+	border-radius: 10px;
+	background-clip: padding-box;
+	background-origin: border-box;
+	box-shadow: inset 0 1px 0 @glass-highlight,
+	            0 6px 18px @glass-shadow;
+}
+
+tooltip label {
+	color: @glass-fg;
+	padding: 2px 4px;
+}
+
+/* ── Module baseline ─────────────────────────────────────────────────── */
+#backlight,
+#battery,
+#bluetooth,
+#clock,
+#cpu,
+#disk,
+#idle_inhibitor,
+#keyboard-state,
+#memory,
+#mode,
+#mpris,
+#network,
+#power-profiles-daemon,
+#pulseaudio,
+#submap,
+#temperature,
+#tray,
+#window,
+#wireplumber,
+#workspaces,
+#custom-backlight,
+#custom-browser,
+#custom-cava_mviz,
+#custom-cycle_wall,
+#custom-dot_update,
+#custom-file_manager,
+#custom-hint,
+#custom-hypridle,
+#custom-hyprpicker,
+#custom-keybinds,
+#custom-keyboard,
+#custom-light_dark,
+#custom-lock,
+#custom-menu,
+#custom-nightlight,
+#custom-playerctl,
+#custom-power,
+#custom-quit,
+#custom-reboot,
+#custom-settings,
+#custom-spotify,
+#custom-swaync,
+#custom-tty,
+#custom-updater,
+#custom-weather {
+	padding: 3px 7px;
+	margin: 0 1px;
+	border-radius: 8px;
+	color: @glass-fg;
+	transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Shared hover: a soft pane of glass lifted out of the pill */
+#backlight:hover,
+#battery:hover,
+#bluetooth:hover,
+#clock:hover,
+#cpu:hover,
+#disk:hover,
+#idle_inhibitor:hover,
+#keyboard-state:hover,
+#memory:hover,
+#mpris:hover,
+#network:hover,
+#power-profiles-daemon:hover,
+#pulseaudio:hover,
+#temperature:hover,
+#window:hover,
+#wireplumber:hover,
+#custom-browser:hover,
+#custom-cava_mviz:hover,
+#custom-cycle_wall:hover,
+#custom-dot_update:hover,
+#custom-file_manager:hover,
+#custom-hint:hover,
+#custom-hypridle:hover,
+#custom-hyprpicker:hover,
+#custom-keyboard:hover,
+#custom-light_dark:hover,
+#custom-lock:hover,
+#custom-menu:hover,
+#custom-nightlight:hover,
+#custom-playerctl:hover,
+#custom-power:hover,
+#custom-quit:hover,
+#custom-reboot:hover,
+#custom-settings:hover,
+#custom-swaync:hover,
+#custom-tty:hover,
+#custom-weather:hover {
+	background-color: @glass-hover;
+}
+
+/* ── Accent modules ──────────────────────────────────────────────────── */
+#custom-menu,
+#custom-light_dark {
+	color: @glass-accent;
+}
+
+#custom-power {
+	color: @glass-urgent;
+}
+
+#custom-power:hover,
+#custom-quit:hover,
+#custom-reboot:hover {
+	background-color: @glass-accent-soft;
+}
+
+/* ── Separators (custom/separator#blank = quiet breathing room) ───────── */
+#custom-separator,
+#custom-separator.blank {
+	background: transparent;
+	color: transparent;
+	padding: 0 3px;
+	margin: 0;
+	opacity: 0;
+}
+
+/* ── Window title ────────────────────────────────────────────────────── */
+#window {
+	color: @glass-fg-dim;
+}
+
+window#waybar.empty #window {
+	color: transparent;
+}
+
+/* ── Workspaces ──────────────────────────────────────────────────────── */
+#workspaces {
+	background: transparent;
+	padding: 0 2px;
+}
+
+#workspaces button,
+#taskbar button {
+	color: @glass-fg-dim;
+	background: transparent;
+	box-shadow: none;
+	padding: 0 4px;
+	border-radius: 8px;
+	border-bottom: 2px solid transparent;
+	transition: all 0.35s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active,
+#taskbar button.active {
+	color: @glass-accent;
+	background-color: @glass-accent-soft;
+	border-bottom: 2px solid @glass-accent;
+	padding: 0 9px;
+	border-radius: 8px;
+}
+
+#workspaces button.focused {
+	color: @glass-fg;
+}
+
+#workspaces button.urgent {
+	color: @background;
+	background-color: @glass-urgent;
+	border-radius: 8px;
+}
+
+#workspaces button:hover,
+#taskbar button:hover {
+	color: @glass-fg;
+	background-color: @glass-hover;
+	border-radius: 8px;
+}
+
+/* ── Tray / indicators ───────────────────────────────────────────────── */
+#tray > .passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+	-gtk-icon-effect: highlight;
+	background-color: @glass-accent-soft;
+	border-radius: 8px;
+}
+
+#idle_inhibitor.activated {
+	color: @glass-ok;
+	background-color: @glass-raised;
+	border-radius: 8px;
+}
+
+#temperature.critical,
+#battery.critical:not(.charging) {
+	color: @glass-urgent;
+	background-color: @glass-accent-soft;
+}
+
+#battery.critical:not(.charging) {
+	animation-name: blink;
+	animation-duration: 3s;
+	animation-timing-function: steps(12);
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+#battery.charging,
+#battery.plugged {
+	color: @glass-ok;
+}
+
+@keyframes blink {
+	to {
+		color: @background;
+		background-color: @glass-urgent;
+	}
+}
+
+/* Custom module state classes (weather / nightlight / hypridle / mic) */
+#custom-weather.default,
+#custom-weather.sunnyDay {
+	color: @glass-warning;
+}
+
+#custom-nightlight,
+#custom-hypridle.notactive {
+	color: @glass-fg-dim;
+}
+
+#pulseaudio.muted,
+#pulseaudio.microphone.source-muted {
+	color: @glass-urgent;
+}
+
+/* ── Sliders ─────────────────────────────────────────────────────────── */
+#backlight-slider slider,
+#pulseaudio-slider slider {
+	min-width: 0;
+	min-height: 0;
+	opacity: 0;
+	background-image: none;
+	border: none;
+	box-shadow: none;
+}
+
+#backlight-slider trough,
+#pulseaudio-slider trough {
+	min-width: 80px;
+	min-height: 10px;
+	border-radius: 8px;
+	background-color: @glass-raised;
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+	min-height: 10px;
+	border-radius: 8px;
+	background-color: @glass-accent;
+}
