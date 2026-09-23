@@ -1,6 +1,6 @@
 # hyprdes
 
-## Hyprdesk is in ALPHA
+### Hyprdesk is in ALPHA
 
 hyprdesk is a cohesive Hyprland desktop profile: a dark glass workspace with a
 consistent terminal, bar, launcher, notifications, dock, wallpaper palette,
