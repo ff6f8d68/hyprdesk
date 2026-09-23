@@ -1,4 +1,4 @@
-# hyprdes
+# hyprdesk
 
 ### Hyprdesk is in ALPHA
 
